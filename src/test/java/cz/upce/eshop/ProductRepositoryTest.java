@@ -16,26 +16,29 @@ class ProductRepositoryTest {
     @Test
     void saveProductTest() {
 
-        Product product = new Product();
-        product.setName("FirstProduct");
-        productRepository.save(product);
+        saveProduct();
 
 
     }
     @Test
     void findProductByNameContains(){
-        Product product = new Product();
-        product.setName("FirstProduct");
-        productRepository.save(product);
+        saveProduct();
         Product p =  productRepository.findProductByNameContains("First");
     }
 
+
+
     @Test
     void findProductsByIdBetween(){
+        saveProduct();
+        List<Product> productByIdBetween = productRepository.findProductByIdBetween(5L, 7L);
+    }
+
+
+    private void saveProduct() {
         Product product = new Product();
         product.setName("FirstProduct");
         productRepository.save(product);
-        List<Product> productByIdBetween = productRepository.findProductByIdBetween(5L, 7L);
     }
 
 }
