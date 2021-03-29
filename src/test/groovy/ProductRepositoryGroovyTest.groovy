@@ -2,7 +2,8 @@ package cz.upce.eshop;
 
 import cz.upce.eshop.datafactory.ProductTestDataFactory;
 import cz.upce.eshop.entity.Product;
-import cz.upce.eshop.repository.ProductRepository;
+import cz.upce.eshop.repository.ProductRepository
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @SpringBootTest
 @Import(ProductTestDataFactory.class)
-class ProductRepositoryTest {
+class ProductRepositoryGroovyTest {
 
     @Autowired
     private ProductRepository productRepository;
@@ -20,8 +21,10 @@ class ProductRepositoryTest {
     private ProductTestDataFactory productTestDataFactory;
     @Test
     void saveProductTest() {
-
-        productTestDataFactory.saveProduct();
+        Product testProduct = new Product(name: "MyProduct" )
+        productTestDataFactory.saveProduct(testProduct);
+        def readFromDb = productRepository.findById(testProduct.getId().get);
+        Assertions.assertThat((readFromDb.getName()).isEaqualTo("MyProduct"));
 
 
     }
