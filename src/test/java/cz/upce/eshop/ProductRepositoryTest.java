@@ -1,6 +1,5 @@
 package cz.upce.eshop;
 
-import cz.upce.eshop.datafactory.ProductTestDataFactory;
 import cz.upce.eshop.entity.Product;
 import cz.upce.eshop.repository.ProductRepository;
 import org.junit.jupiter.api.Test;

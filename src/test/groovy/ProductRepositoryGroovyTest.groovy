@@ -1,30 +1,32 @@
-package cz.upce.eshop;
+package cz.upce.eshop
 
-import cz.upce.eshop.datafactory.ProductTestDataFactory;
+import cz.upce.eshop.datafactory.Creator;
+
 import cz.upce.eshop.entity.Product;
 import cz.upce.eshop.repository.ProductRepository
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
-
-import java.util.List;
+import org.springframework.context.annotation.Import
 
 @SpringBootTest
-@Import(ProductTestDataFactory.class)
+@Import(Creator.class)
 class ProductRepositoryGroovyTest {
 
     @Autowired
     private ProductRepository productRepository;
     @Autowired
-    private ProductTestDataFactory productTestDataFactory;
+    private Creator creator;
+
     @Test
     void saveProductTest() {
         Product testProduct = new Product(name: "MyProduct" )
-        productTestDataFactory.saveProduct(testProduct);
+        creator.save(testProduct);
+
         def readFromDb = productRepository.findById(testProduct.getId().get);
         Assertions.assertThat((readFromDb.getName()).isEaqualTo("MyProduct"));
+
 
 
     }
